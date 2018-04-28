@@ -26,11 +26,11 @@ setup(
     name='pyalgotrade_python3',
     version='0.1',
     description='Adaptation of Python Algorithmic Trading to python3 for pip',
-    long_description='Python library for backtesting stock trading strategies.',
-    author='Gabriel Martin Becedillas Ruiz',
-    author_email='pyalgotrade@gmail.com',
+    long_description='Adaptation of Python Algorithmic Trading by Gabriel Martin Becedillas Ruiz to python3 for pip.',
+    author='Mikhail Berlinkov',
+    author_email='mberl_upwork@mail.ru',
     url='http://gbeced.github.io/pyalgotrade/',
-    download_url='http://sourceforge.net/projects/pyalgotrade/files/0.18/PyAlgoTrade-0.18.tar.gz/download',
+    download_url='https://github.com/berlm/pyalgotrade',
     packages=[
         'pyalgotrade',
         'pyalgotrade.barfeed',
@@ -62,4 +62,22 @@ setup(
         'Bitstamp': ["ws4py>=0.3.4", "tornado"],
         'Twitter': ["tweepy"],
     },
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha',
+
+        # Indicate who your project is intended for
+        'Intended Audience :: Developers',
+
+        # Pick your license as you wish (should match "license" above)
+
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+    ],
+    python_requires='>=3.3',
 )
