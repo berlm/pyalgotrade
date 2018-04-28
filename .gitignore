@@ -11,4 +11,4 @@ dist
 build
 PyAlgoTrade.egg-info
 
-testcases/twitter_credentials.py
+twitter_credentials.py

@@ -21,7 +21,7 @@
 import os
 import datetime
 
-import common
+from testcases import common
 
 from pyalgotrade.tools import quandl
 from pyalgotrade import bar

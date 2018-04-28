@@ -115,11 +115,12 @@ class BarFeed(membf.BarFeed):
     def addBarsFromCSV(self, instrument, path, rowParser):
         # Load the csv file
         loadedBars = []
-        reader = csvutils.FastDictReader(open(path, "r"), fieldnames=rowParser.getFieldNames(), delimiter=rowParser.getDelimiter())
-        for row in reader:
-            bar_ = rowParser.parseBar(row)
-            if bar_ is not None and (self.__barFilter is None or self.__barFilter.includeBar(bar_)):
-                loadedBars.append(bar_)
+        with open(path, "r") as f:
+            reader = csvutils.FastDictReader(f, fieldnames=rowParser.getFieldNames(), delimiter=rowParser.getDelimiter())
+            for row in reader:
+                bar_ = rowParser.parseBar(row)
+                if bar_ is not None and (self.__barFilter is None or self.__barFilter.includeBar(bar_)):
+                    loadedBars.append(bar_)
 
         self.addBarsFromSequence(instrument, loadedBars)
 
@@ -178,7 +179,7 @@ class GenericRowParser(RowParser):
 
         # Process extra columns.
         extra = {}
-        for k, v in csvRowDict.iteritems():
+        for k, v in csvRowDict.items():
             if k not in self.__columnNames:
                 extra[k] = csvutils.float_or_string(v)
 

@@ -157,8 +157,8 @@ def main(plot):
         plt.getOrCreateSubplot("returns").addDataSeries("Strategy", returnsAnalyzer.getCumulativeReturns())
 
     strat.run()
-    print "Sharpe ratio: %.2f" % sharpeRatioAnalyzer.getSharpeRatio(0.05)
-    print "Returns: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100)
+    print("Sharpe ratio: %.2f" % sharpeRatioAnalyzer.getSharpeRatio(0.05))
+    print("Returns: %.2f %%" % (returnsAnalyzer.getCumulativeReturns()[-1] * 100))
 
     if plot:
         plt.plot()

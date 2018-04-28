@@ -18,7 +18,7 @@
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
 """
 
-import common
+from testcases import common
 
 from pyalgotrade.technical import cross
 from pyalgotrade.technical import ma

@@ -18,17 +18,13 @@
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
 """
 
-import sys
 import logging
 
-import common
-
-from pyalgotrade.optimizer import local
 from pyalgotrade import strategy
 from pyalgotrade.barfeed import yahoofeed
-
-sys.path.append("samples")
-import sma_crossover
+from pyalgotrade.optimizer import local
+from samples import sma_crossover
+from testcases import common
 
 
 def parameters_generator(instrument, smaFirst, smaLast):

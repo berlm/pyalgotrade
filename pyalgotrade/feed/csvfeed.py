@@ -85,13 +85,14 @@ class BaseFeed(memfeed.MemFeed):
     def addValuesFromCSV(self, path):
         # Load the values from the csv file
         values = []
-        reader = csvutils.FastDictReader(open(path, "r"), fieldnames=self.__rowParser.getFieldNames(), delimiter=self.__rowParser.getDelimiter())
-        for row in reader:
-            dateTime, rowValues = self.__rowParser.parseRow(row)
-            if dateTime is not None and (self.__rowFilter is None or self.__rowFilter.includeRow(dateTime, rowValues)):
-                values.append((dateTime, rowValues))
+        with open(path, "r") as f:
+            reader = csvutils.FastDictReader(f, fieldnames=self.__rowParser.getFieldNames(), delimiter=self.__rowParser.getDelimiter())
+            for row in reader:
+                dateTime, rowValues = self.__rowParser.parseRow(row)
+                if dateTime is not None and (self.__rowFilter is None or self.__rowFilter.includeRow(dateTime, rowValues)):
+                    values.append((dateTime, rowValues))
 
-        self.addValues(values)
+            self.addValues(values)
 
 
 # This row parser doesn't support CSV files that have date and time in different columns.

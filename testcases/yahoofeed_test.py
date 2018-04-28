@@ -20,9 +20,7 @@
 
 import datetime
 
-import common
-import barfeed_test
-import feed_test
+from testcases import common, barfeed_test, feed_test
 
 from pyalgotrade.utils import dt
 from pyalgotrade.barfeed import yahoofeed
@@ -205,14 +203,14 @@ class FeedTestCase(common.TestCase):
         try:
             barFeed = yahoofeed.Feed(timezone=-5)
             self.assertTrue(False, "Exception expected")
-        except Exception, e:
+        except Exception as e:
             self.assertTrue(str(e).find("timezone as an int parameter is not supported anymore") == 0)
 
         try:
             barFeed = yahoofeed.Feed()
             barFeed.addBarsFromCSV(FeedTestCase.TestInstrument, common.get_data_file_path("orcl-2000-yahoofinance.csv"), -3)
             self.assertTrue(False, "Exception expected")
-        except Exception, e:
+        except Exception as e:
             self.assertTrue(str(e).find("timezone as an int parameter is not supported anymore") == 0)
 
     def testMapTypeOperations(self):

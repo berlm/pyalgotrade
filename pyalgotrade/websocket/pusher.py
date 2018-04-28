@@ -19,7 +19,7 @@
 """
 
 import json
-import urllib
+import urllib.parse as urllib
 
 import pyalgotrade
 from pyalgotrade.websocket import client

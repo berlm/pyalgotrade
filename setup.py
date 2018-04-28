@@ -23,9 +23,9 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name='PyAlgoTrade',
-    version='0.18',
-    description='Python Algorithmic Trading',
+    name='pyalgotrade_python3',
+    version='0.1',
+    description='Adaptation of Python Algorithmic Trading to python3 for pip',
     long_description='Python library for backtesting stock trading strategies.',
     author='Gabriel Martin Becedillas Ruiz',
     author_email='pyalgotrade@gmail.com',
@@ -56,10 +56,10 @@ setup(
         "requests",
     ],
     extras_require={
-        'Scipy':  ["scipy"],
-        'TALib':  ["Cython", "TA-Lib"],
-        'Plotting':  ["matplotlib"],
-        'Bitstamp':  ["ws4py>=0.3.4", "tornado"],
-        'Twitter':  ["tweepy"],
+        'Scipy': ["scipy"],
+        'TALib': ["Cython", "TA-Lib"],
+        'Plotting': ["matplotlib"],
+        'Bitstamp': ["ws4py>=0.3.4", "tornado"],
+        'Twitter': ["tweepy"],
     },
 )

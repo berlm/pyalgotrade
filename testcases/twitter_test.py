@@ -21,7 +21,7 @@
 import os
 import datetime
 
-import common
+from testcases import common
 try:
     # This will get environment variables set.
     import credentials

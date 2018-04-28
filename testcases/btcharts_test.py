@@ -20,7 +20,7 @@
 
 import datetime
 
-import common
+from testcases import common
 
 from pyalgotrade.bitcoincharts import barfeed
 from pyalgotrade.utils import dt

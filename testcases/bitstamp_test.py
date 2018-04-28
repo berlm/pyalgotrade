@@ -21,11 +21,10 @@
 import datetime
 import time
 import threading
-import Queue
+import queue as Queue
 import json
 
-import common as tc_common
-import test_strategy
+from testcases import test_strategy, common as tc_common
 
 from pyalgotrade import broker as basebroker
 from pyalgotrade.bitstamp import barfeed
@@ -548,7 +547,7 @@ class LiveTradingTestCase(tc_common.TestCase):
                 TestStrategy.__init__(self, feed, brk)
 
             def onBars(self, bars):
-                order = self.getBroker().getActiveOrders()[0]
+                order = list(self.getBroker().getActiveOrders())[0]
                 self.getBroker().cancelOrder(order)
                 self.stop()
 

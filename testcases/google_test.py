@@ -21,7 +21,7 @@
 import os
 import datetime
 
-import common
+from testcases import common
 
 from pyalgotrade import bar
 from pyalgotrade.barfeed import googlefeed

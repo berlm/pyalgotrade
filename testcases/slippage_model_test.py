@@ -20,7 +20,7 @@
 
 import unittest
 
-import broker_backtesting_test
+from testcases import broker_backtesting_test
 
 from pyalgotrade import broker
 from pyalgotrade.broker import slippage

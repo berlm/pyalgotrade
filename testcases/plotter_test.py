@@ -18,16 +18,12 @@
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
 """
 
-import sys
 import os
 
-import common
-
-from pyalgotrade.barfeed import yahoofeed
 from pyalgotrade import plotter
-
-sys.path.append("samples")
-import sma_crossover
+from pyalgotrade.barfeed import yahoofeed
+from samples import sma_crossover
+from testcases import common
 
 
 class PlotterTestCase(common.TestCase):

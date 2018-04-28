@@ -27,6 +27,7 @@ import unittest
 
 # Force matplotlib to not use any Xwindows backend.
 import matplotlib
+
 matplotlib.use('Agg')
 
 from pyalgotrade import dataseries
@@ -75,47 +76,48 @@ def run_sample_script(script, params=[]):
 
 
 def get_file_lines(fileName):
-    rawLines = open(fileName, "r").read().splitlines()
+    with open(fileName, "r") as f:
+        rawLines = f.read().splitlines()
     return [rawLine.strip() for rawLine in rawLines]
 
 
 def compare_head(fileName, lines, path="samples"):
-    assert(len(lines) > 0)
+    assert (len(lines) > 0)
     fileLines = get_file_lines(os.path.join(path, fileName))
     return fileLines[0:len(lines)] == lines
 
 
 def compare_tail(fileName, lines, path="samples"):
-    assert(len(lines) > 0)
+    assert (len(lines) > 0)
     fileLines = get_file_lines(os.path.join(path, fileName))
-    return fileLines[len(lines)*-1:] == lines
+    return fileLines[len(lines) * -1:] == lines
 
 
 def head_file(fileName, line_count, path="samples"):
-    assert(line_count > 0)
+    assert (line_count > 0)
     fileLines = get_file_lines(os.path.join(path, fileName))
     return fileLines[0:line_count]
 
 
 def tail_file(fileName, line_count, path="samples"):
-    assert(line_count > 0)
+    assert (line_count > 0)
     lines = get_file_lines(os.path.join(path, fileName))
-    return lines[line_count*-1:]
+    return lines[line_count * -1:]
 
 
 def load_test_csv(path):
     inputSeq = []
     expectedSeq = []
-    csvFile = open(path, "r")
-    reader = csv.DictReader(csvFile)
-    for row in reader:
-        inputSeq.append(float(row["Input"]))
-        expected = row["Expected"]
-        if not expected:
-            expected = None
-        else:
-            expected = float(expected)
-        expectedSeq.append(expected)
+    with open(path, "r") as csvFile:
+        reader = csv.DictReader(csvFile)
+        for row in reader:
+            inputSeq.append(float(row["Input"]))
+            expected = row["Expected"]
+            if not expected:
+                expected = None
+            else:
+                expected = float(expected)
+            expectedSeq.append(expected)
 
     return inputSeq, expectedSeq
 
@@ -128,7 +130,7 @@ def test_from_csv(testcase, filename, filterClassBuilder, roundDecimals=2, maxLe
     inputValues, expectedValues = load_test_csv(get_data_file_path(filename))
     inputDS = dataseries.SequenceDataSeries(maxLen=maxLen)
     filterDS = filterClassBuilder(inputDS)
-    for i in xrange(len(inputValues)):
+    for i in range(len(inputValues)):
         inputDS.append(inputValues[i])
         value = safe_round(filterDS[i], roundDecimals)
         expectedValue = safe_round(expectedValues[i], roundDecimals)
@@ -175,4 +177,6 @@ class TmpDir(object):
 
 
 class TestCase(unittest.TestCase):
-    pass
+    def assertEqual(self, first, second, msg=None):
+        if isinstance(second, list) and not isinstance(first, list):
+            self.assertEqual(self, list(first), second, msg=msg)

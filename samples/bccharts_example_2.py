@@ -36,11 +36,11 @@ class VWAPMomentum(strategy.BacktestingStrategy):
         brk = self.getBroker()
         cashAvail = brk.getCash() * 0.98
         size = round(cashAvail / price, 3)
-        if len(buyOrders) == 0 and price*size > VWAPMomentum.MIN_TRADE:
+        if len(list(buyOrders)) == 0 and price * size > VWAPMomentum.MIN_TRADE:
             self.info("Buy %s at %s" % (size, price))
             try:
                 self.limitOrder(self.__instrument, price, size)
-            except Exception, e:
+            except Exception as e:
                 self.error("Failed to buy: %s" % (e))
 
     def _sellSignal(self, price):
@@ -49,9 +49,9 @@ class VWAPMomentum(strategy.BacktestingStrategy):
 
         brk = self.getBroker()
         shares = brk.getShares(self.__instrument)
-        if len(sellOrders) == 0 and shares > 0:
+        if len(list(sellOrders)) == 0 and shares > 0:
             self.info("Sell %s at %s" % (shares, price))
-            self.limitOrder(self.__instrument, price, shares*-1)
+            self.limitOrder(self.__instrument, price, shares * -1)
 
     def getVWAP(self):
         return self.__vwap
@@ -87,7 +87,7 @@ def main(plot):
     buyThreshold = 0.02
     sellThreshold = 0.01
 
-    barFeed = csvfeed.GenericBarFeed(bar.Frequency.MINUTE*30)
+    barFeed = csvfeed.GenericBarFeed(bar.Frequency.MINUTE * 30)
     barFeed.addBarsFromCSV(instrument, "30min-bitstampUSD.csv")
     brk = broker.BacktestingBroker(initialCash, barFeed)
     strat = VWAPMomentum(barFeed, brk, instrument, vwapWindowSize, buyThreshold, sellThreshold)
@@ -96,10 +96,12 @@ def main(plot):
         plt = plotter.StrategyPlotter(strat)
         plt.getInstrumentSubplot(instrument).addDataSeries("VWAP", strat.getVWAP())
 
-    strat.run()
+    res = strat.run()
 
     if plot:
         plt.plot()
+
+    return res
 
 
 if __name__ == "__main__":

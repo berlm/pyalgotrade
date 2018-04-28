@@ -109,7 +109,7 @@ class BaseFeed(observer.Subject):
         return dateTime is not None
 
     def getKeys(self):
-        return self.__ds.keys()
+        return list(self.__ds.keys())
 
     def __getitem__(self, key):
         """Returns the :class:`pyalgotrade.dataseries.DataSeries` for a given key."""

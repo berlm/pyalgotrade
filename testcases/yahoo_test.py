@@ -20,7 +20,7 @@
 
 import os
 
-import common
+from testcases import common
 
 from pyalgotrade.tools import yahoofinance
 from pyalgotrade import bar

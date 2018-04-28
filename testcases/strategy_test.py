@@ -20,7 +20,7 @@
 
 import datetime
 
-import common
+from testcases import common
 
 from pyalgotrade import strategy
 from pyalgotrade import broker

@@ -19,9 +19,9 @@
 """
 
 import datetime
-import cPickle
+import pickle as cPickle
 
-import common
+from testcases import common
 
 from pyalgotrade import bar
 
@@ -96,11 +96,11 @@ class BarsTestCase(common.TestCase):
         b1 = bar.BasicBar(dt, 1, 1, 1, 1, 10, 1, bar.Frequency.DAY)
         b2 = bar.BasicBar(dt, 2, 2, 2, 2, 10, 2, bar.Frequency.DAY)
         bars = bar.Bars({"a": b1, "b": b2})
-        self.assertEquals(bars["a"].getClose(), 1)
-        self.assertEquals(bars["b"].getClose(), 2)
+        self.assertEqual(bars["a"].getClose(), 1)
+        self.assertEqual(bars["b"].getClose(), 2)
         self.assertTrue("a" in bars)
-        self.assertEquals(bars.items(), [("a", b1), ("b", b2)])
-        self.assertEquals(bars.keys(), ["a", "b"])
-        self.assertEquals(bars.getInstruments(), ["a", "b"])
-        self.assertEquals(bars.getDateTime(), dt)
-        self.assertEquals(bars.getBar("a").getClose(), 1)
+        self.assertEqual(list(bars.items()), [("a", b1), ("b", b2)])
+        self.assertEqual(list(bars.keys()), ["a", "b"])
+        self.assertEqual(list(bars.getInstruments()), ["a", "b"])
+        self.assertEqual(bars.getDateTime(), dt)
+        self.assertEqual(bars.getBar("a").getClose(), 1)
